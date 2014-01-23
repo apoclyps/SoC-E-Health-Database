@@ -1,0 +1,93 @@
+use mbchb;
+
+# INSERTION
+PREPARE insertChannel FROM 'INSERT INTO Channel(Title, Link, Description, LastBuild, Language, UpdatePeriod, UpdateFrequency, URLGenerator)
+	VALUES (?,?,?,?,?,?,?,?)';
+SET @a = "something";
+SET @b = "something";
+SET @c = "something";
+SET @d = "2014-01-18 17:45:12";
+SET @e = "something";
+SET @f = "something";
+SET @g = 1;
+SET @h = "something";
+EXECUTE insertChannel USING @a, @b, @c, @d, @e, @f, @g, @h;
+
+PREPARE insertFlashcards FROM 'INSERT INTO Flashcards(CardSubject, QuestionNumber, Question, Answer, QImg, AImg)
+	VALUES (?,?,?,?,?,?)';
+SET @a = 1;
+SET @b = 1;
+SET @c = "something";
+SET @d = "something";
+SET @e = "";
+SET @f = "";
+EXECUTE insertFlashcards USING @a, @b, @c, @d, @e, @f;
+
+PREPARE insertCardSubject FROM 'INSERT INTO CardSubject(CardSubject, LectureNum)
+	VALUES (?,?)';
+SET @a = "Subject";
+SET @b = 1;
+EXECUTE insertCardSubject USING @a, @b;
+
+PREPARE insertItem FROM 'INSERT INTO ItemTable(Title,Link,Comments,PubDate,Creator,Category,Description,CommentRSS,ChannelID)
+	VALUES (?,?,?,?,?,?,?,?,?)';
+SET @a = "Title";
+SET @b = "Link";
+SET @c = "Comments";
+SET @d = "Pub";
+SET @e = "Creator";
+SET @f = "Category";
+SET @g = "Description";
+SET @h = "CommentRSS";
+SET @i = 4;
+EXECUTE insertItem USING @a, @b, @c, @d, @e, @f, @g, @h, @i;
+
+#DELETE
+PREPARE deleteItem FROM 'DELETE FROM ItemTable WHERE ? = ?';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE deleteItem USING @a, @b;
+
+PREPARE deleteCard FROM 'DELETE FROM CardSubject WHERE ? = ?';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE deleteCard USING @a, @b;
+
+PREPARE deleteSubject FROM 'DELETE FROM CardSubject WHERE ? = ?';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE deleteSubject USING @a, @b;
+
+PREPARE deleteChannel FROM 'DELETE FROM Channel WHERE ? = ?';
+SET @a = Link;
+SET @b = "Link";
+EXECUTE deleteChannel USING @a, @b;
+
+#UPDATE
+PREPARE updateSubject FROM 'UPDATE CardSubject
+SET column1=value1,column2=value2,...
+WHERE some_column=some_value';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE updateSubject USING @a, @b;
+
+PREPARE updateCard FROM 'UPDATE Flashcards
+SET column1=value1,column2=value2,...
+WHERE some_column=some_value';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE updateCard USING @a, @b;
+
+PREPARE updateItem FROM 'UPDATE ItemTable
+SET column1=value1,column2=value2,...
+WHERE some_column=some_value';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE updateItem USING @a, @b;
+
+PREPARE updateChannel FROM 'UPDATE Channel
+SET column1=value1,column2=value2,...
+WHERE some_column=some_value';
+SET @a = "Link";
+SET @b = "Link";
+EXECUTE updateChannel USING @a, @b;
