@@ -8,7 +8,7 @@ SET @b = "something";
 SET @c = "something";
 SET @d = "2014-01-18 17:45:12";
 SET @e = "something";
-SET @f = "something";
+SET @f = "something2";
 SET @g = 1;
 SET @h = "something";
 EXECUTE insertChannel USING @a, @b, @c, @d, @e, @f, @g, @h;
