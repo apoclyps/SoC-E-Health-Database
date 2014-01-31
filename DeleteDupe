@@ -1,0 +1,44 @@
+use test;
+
+#List duplicates
+SELECT Question, Answer, count(*)
+FROM Flashcards
+GROUP BY Question, Answer
+HAVING count(*) > 1;
+
+#Delete duplicates : Flashcards
+DELETE Flashcards
+FROM Flashcards 
+LEFT OUTER JOIN (  
+   SELECT MAX(CardID) as RowId 
+   FROM Flashcards   
+   GROUP BY Question, Answer 
+) as KeepRows ON  
+   Flashcards.CardID = KeepRows.RowId  
+WHERE  
+   KeepRows.RowId IS NULL;
+
+#Empty Flashcards
+Delete From Flashcards;
+
+
+#Find Item duplicates
+SELECT Title, Category, PubDate, count(*)
+FROM Item
+GROUP BY Title, Category, PubDate
+HAVING count(*) > 0;
+
+#Delete duplicates : Items
+DELETE Item
+FROM Item 
+LEFT OUTER JOIN (  
+   SELECT MAX(ID) as RowId 
+   FROM Item   
+   GROUP BY Title, Category, PubDate 
+) as KeepRows ON  
+   Item.ID = KeepRows.RowId  
+WHERE  
+   KeepRows.RowId IS NULL;
+
+#Empty Items
+Delete from Item;
